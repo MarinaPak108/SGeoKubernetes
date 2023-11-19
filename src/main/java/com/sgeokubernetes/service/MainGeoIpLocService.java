@@ -47,17 +47,25 @@ public class MainGeoIpLocService {
         GeoEntity geoEntityByIp = repo.findGeoEntityByIpId(ipId);
         GeoIpData position = new GeoIpData();
         if(geoEntityByIp!=null){
+            position = modelMapper.map(geoEntityByIp, GeoIpData.class);
             position.setIpAddress(ip);
-            position.setCity(geoEntityByIp.getCity());
-            position.setFullLocation(geoEntityByIp.getFullLocation());
             position.setDevice(deviceDetails);
-            position.setLatitude(geoEntityByIp.getLatitude());
-            position.setLongitude(geoEntityByIp.getLongitude());
+//            position.setCity(geoEntityByIp.getCity());
+//            position.setFullLocation(geoEntityByIp.getFullLocation());
+//
+//            position.setLatitude(geoEntityByIp.getLatitude());
+//            position.setLongitude(geoEntityByIp.getLongitude());
             return position;
         } else {
             position = extService.extGetIpLocation(ip, deviceDetails);
             GeoEntity geoEntity = modelMapper.map(position, GeoEntity.class);
             geoEntity.setIpId(ipId);
+//            GeoEntity geoEntity = new GeoEntity();
+//            geoEntity.setIpId(ipId);
+//            geoEntity.setFullLocation(position.getFullLocation());
+//            geoEntity.setCity(position.getCity());
+//            geoEntity.setLongitude(position.getLongitude());
+//            geoEntity.setLatitude(position.getLatitude());
             repo.save(geoEntity);
             return position;
         }
