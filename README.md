@@ -1,6 +1,6 @@
 # SGeoKubernetes
 
-##Kubernetes Porject App
+## Kubernetes Porject App
 
 RestAPI that uses MaxMind's GeoIP2 Enterprise database to find geolocation by IP adress.
 ->shows data by IP from local MySQL db if avaliable
